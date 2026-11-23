@@ -54,20 +54,28 @@
     h3 { font-size: 1.22rem; margin: 0 0 0.35rem; }
     p { margin: 0.7rem 0; }
     .lede { font-size: 1.16rem; max-width: 40rem; }
-    .voucher-banner {
-      background: var(--amber);
-      color: var(--ink);
-      padding: 0.8rem 0 0.9rem;
+    .voucher-hero {
+      margin: 1.35rem 0 1.75rem;
     }
-    .voucher-banner .kicker {
+    .voucher-hero .kicker {
+      display: inline-block;
+      box-sizing: border-box;
+      max-width: 100%;
       margin: 0;
-      font-size: 0.95rem;
+      background: #E89A10;
+      color: #12201C;
+      font-size: clamp(1.6rem, 6.4vw, 2.6rem);
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
+      line-height: 1.15;
+      text-align: center;
+      padding: 0.5rem 1.2rem 0.55rem;
+      border-radius: 999px;
+      box-shadow: 0 0 0 3px #B06C08;
     }
-    .voucher-banner .terms {
-      margin: 0.2rem 0 0;
+    .voucher-hero .terms {
+      margin: 0.7rem 0 0;
       max-width: 40rem;
     }
     .grid {
@@ -158,15 +166,13 @@
       </nav>
     </div>
   </header>
-  <aside class="voucher-banner" id="credit">
-    <div class="wrap">
-      <p class="kicker">$50 for new members</p>
-      <p class="terms">Every new member gets a $50 cash voucher. One voucher per new customer, used against their first job. We’ll honour it, and we’ll show it on the quote. The voucher is not redeemable for cash, and you can’t transfer it.</p>
-    </div>
-  </aside>
   <main id="top" class="wrap">
     <h1>Hire laid-off top-firm talent.</h1>
     <p class="lede">We’re recruiting laid-off staff from top firms (Big 4, banks, tech). The work is remote: coding, design, writing, admin, marketing, and video. Send the brief. We quote a fixed price or an hourly rate before we start, or we tell you we can’t take the job.</p>
+    <div class="voucher-hero" id="credit">
+      <p class="kicker">$50 FOR NEW MEMBERS</p>
+      <p class="terms">Every new member gets a $50 cash voucher. One voucher per new customer, used against their first job. We’ll honour it, and we’ll show it on the quote. The voucher is not redeemable for cash, and you can’t transfer it.</p>
+    </div>
     <p>Rates start at $15 an hour for most of this work, and at $10 an hour for admin support. In development, design, and writing, those starting rates are often well under typical posted marketplace rates. We don’t claim to be the cheapest in every case. Some jobs will cost more than the starting rate; you’ll see the price on the quote.</p>
     <p class="fine">All prices in AUD. This page is for clients in Australia.</p>
 
