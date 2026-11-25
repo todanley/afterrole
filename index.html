@@ -2,322 +2,225 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AfterRole — hire laid-off top-firm talent as remote freelancers</title>
-  <meta name="description" content="We're recruiting laid-off staff from top firms (Big 4, banks, tech) as remote freelancers, by the hour or by the job. As low as $10 per task. Every new member gets a $50 cash voucher.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AfterRole — Claim $50 credit</title>
+  <meta name="description" content="Claim a $50 new-member credit. It applies to your first order.">
   <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#0B131C">
+  <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://todanley.github.io/afterrole/">
   <link rel="icon" href="assets/favicon.ico" sizes="any">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/afterrole-icon-180.png">
-  <meta property="og:title" content="AfterRole — hire laid-off top-firm talent as remote freelancers">
-  <meta property="og:description" content="We're recruiting laid-off staff from top firms (Big 4, banks, tech) as remote freelancers, by the hour or by the job. As low as $10 per task. Every new member gets a $50 cash voucher.">
+  <meta property="og:title" content="AfterRole — Claim $50 credit">
+  <meta property="og:description" content="Claim a $50 new-member credit. It applies to your first order.">
   <meta property="og:image" content="https://todanley.github.io/afterrole/assets/afterrole-icon-512.png">
   <meta property="og:url" content="https://todanley.github.io/afterrole/">
   <style>
     :root {
-      --ink: #1A2E28;
-      --muted: #5C635F;
-      --line: #D3CDC4;
-      --paper: #F4F1EA;
-      --card: #FFFCF7;
-      --accent: #1C3D34;
-      --pine: #1C3D34;
-      --focus: #1A2E28;
-      --amber: #D68A1C;
+      --bg: #0B131C;
+      --cream: #F3EEE4;
+      --gold: #E3B65F;
+      --gold-hover: #ECCA7C;
+      --ink: #0B131C;
+      --muted: #8B8680;
+      --field: rgba(243, 238, 228, 0.05);
+      --line: rgba(243, 238, 228, 0.18);
+      --focus: #E0B25C;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html, body { margin: 0; min-height: 100%; }
     body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 1.05rem;
-      line-height: 1.55;
+      min-height: 100dvh;
+      color: var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.4;
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 90% 55% at 50% 36%, rgba(224, 178, 92, 0.13), transparent 62%),
+        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(16, 36, 40, 0.65), transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.93 0 0 0 0 0.88 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-attachment: fixed;
     }
-    .wrap { width: min(52rem, calc(100% - 2rem)); margin-left: auto; margin-right: auto; }
-    header { padding: 1.15rem 0 1rem; }
-    .brand-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-    .logo { display: flex; align-items: center; text-decoration: none; color: inherit; }
-    .logo img { height: 36px; width: auto; display: block; }
-    nav { font-size: 0.92rem; }
-    nav a { color: var(--pine); margin-left: 0.9rem; text-decoration: none; }
-    nav a:hover { text-decoration: underline; }
-    h1, h2, h3 {
-      font-family: Palatino, "Palatino Linotype", "Iowan Old Style", Georgia, serif;
-      font-weight: 600;
-      line-height: 1.2;
-    }
-    h1 { font-size: clamp(2rem, 4.5vw, 2.55rem); margin: 1.7rem 0 0.75rem; }
-    h2 { font-size: 1.55rem; margin: 2.4rem 0 0.8rem; }
-    h3 { font-size: 1.22rem; margin: 0 0 0.35rem; }
-    p { margin: 0.7rem 0; }
-    .lede { font-size: 1.16rem; max-width: 40rem; }
-    .hero-sub {
-      margin: -0.15rem 0 0.9rem;
-      font-size: clamp(1.18rem, 2.6vw, 1.45rem);
-      font-weight: 600;
-      color: var(--pine);
-      max-width: 40rem;
-    }
-    .voucher-hero {
-      margin: 1.35rem 0 1.75rem;
-    }
-    .voucher-hero .kicker {
-      display: inline-block;
-      box-sizing: border-box;
-      max-width: 100%;
-      margin: 0;
-      background: #E89A10;
-      color: #12201C;
-      font-size: clamp(1.6rem, 6.4vw, 2.6rem);
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      line-height: 1.15;
-      text-align: center;
-      padding: 0.5rem 1.2rem 0.55rem;
-      border-radius: 999px;
-      box-shadow: 0 0 0 3px #B06C08;
-    }
-    .voucher-hero .terms {
-      margin: 0.7rem 0 0;
-      max-width: 40rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
-      gap: 0.9rem;
-      margin: 1.15rem 0 0.6rem;
-    }
-    article.cat {
-      background: var(--card);
-      border: 1px solid var(--line);
-      padding: 1.05rem 1.1rem 1.05rem;
+    .frame {
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      padding: max(1.75rem, env(safe-area-inset-top)) 1.5rem max(1.75rem, env(safe-area-inset-bottom));
     }
-    article.cat:target { outline: 2px solid var(--pine); outline-offset: 2px; }
-    .rate { font-weight: 600; color: var(--pine); margin: 0.1rem 0 0.5rem; }
-    article.cat p { flex: 1; }
-    .ask {
-      display: inline-block;
-      margin-top: 0.4rem;
-      font-weight: 600;
-      color: var(--pine);
-      text-decoration: none;
-      border-bottom: 1px solid var(--pine);
+    .logo {
+      display: block;
+      flex: 0 0 auto;
     }
-    .ask:hover { color: var(--accent); border-color: var(--accent); }
-    .note, .fine, footer, .src { color: var(--muted); font-size: 0.92rem; }
-    .src a, main a { color: var(--pine); }
-    ol.steps { padding-left: 1.2rem; }
-    ol.steps li { margin: 0.45rem 0; }
-    .faq details { border-top: 1px solid var(--line); padding: 0.7rem 0; }
-    .faq details:last-child { border-bottom: 1px solid var(--line); }
-    .faq summary { cursor: pointer; font-weight: 600; color: var(--ink); }
-    .faq details p { margin: 0.45rem 0 0.2rem; }
-    form {
-      background: var(--card);
-      border: 1px solid var(--line);
-      padding: 1.1rem 1.15rem 1.2rem;
-      margin: 1rem 0 2rem;
+    .logo img {
+      display: block;
+      height: 38px;
+      width: auto;
     }
-    label { display: block; font-weight: 600; margin: 0.85rem 0 0.3rem; }
-    .hint { font-weight: 400; color: var(--muted); font-size: 0.9rem; }
-    input, select, textarea {
+    .stage {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      font: inherit;
-      color: var(--ink);
-      background: #fff;
-      border: 1px solid #b7b0a5;
-      border-radius: 2px;
-      padding: 0.5rem 0.55rem;
+      max-width: 26rem;
+      padding: 1.5rem 0 0.5rem;
     }
-    textarea { min-height: 9rem; resize: vertical; }
-    input:focus, select:focus, textarea:focus { outline: 2px solid var(--focus); outline-offset: 1px; }
-    .hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-    button[type="submit"] {
-      margin-top: 1.1rem;
-      font: inherit;
+    h1 {
+      margin: 0 0 2.15rem;
+      text-align: center;
+      font-weight: 500;
+    }
+    .lead {
+      display: block;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: #fff;
-      background: var(--pine);
-      border: 0;
-      padding: 0.65rem 1.1rem;
-      cursor: pointer;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--cream);
     }
-    form label:first-of-type { margin-top: 0; }
-    button[type="submit"]:hover { filter: brightness(1.08); }
-    button[type="submit"]:focus { outline: 2px solid var(--focus); outline-offset: 2px; }
-    footer { padding: 2rem 0 2.6rem; border-top: 1px solid var(--line); margin-top: 1rem; }
-    footer p { margin: 0.4rem 0; }
-    @media (max-width: 40rem) {
-      nav a { margin: 0 0.7rem 0 0; }
-      .logo img { height: 32px; }
+    .amount {
+      display: block;
+      margin: 0.18em 0 0.14em;
+      color: var(--gold);
+      font-size: clamp(6.4rem, 32vw, 10.25rem);
+      font-weight: 650;
+      letter-spacing: -0.045em;
+      line-height: 0.86;
+      font-variant-numeric: lining-nums;
+      background-image: linear-gradient(180deg, #F6E1A6 0%, #E3B65F 48%, #C79238 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 54px rgba(227, 182, 95, 0.32));
+    }
+    .amount .curr {
+      font-size: 0.46em;
+      font-weight: 600;
+      letter-spacing: 0;
+      margin-right: 0.02em;
+      position: relative;
+      top: -0.38em;
+    }
+    form { width: 100%; }
+    .hp {
+      position: absolute;
+      left: -10000px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+    .sr {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    input[type="email"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      height: 3.35rem;
+      margin: 0;
+      padding: 0 1rem;
+      color: var(--cream);
+      background: var(--field);
+      border: 1px solid var(--line);
+      border-radius: 0.7rem;
+      font: inherit;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    input[type="email"]::placeholder { color: rgba(243, 238, 228, 0.52); }
+    input[type="email"]:hover { border-color: rgba(243, 238, 228, 0.32); }
+    input[type="email"]:focus {
+      border-color: var(--gold);
+      background: rgba(243, 238, 228, 0.07);
+      box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.22);
+    }
+    button[type="submit"] {
+      appearance: none;
+      width: 100%;
+      height: 3.35rem;
+      margin: 0.7rem 0 0;
+      padding: 0 1rem;
+      color: var(--ink);
+      background: var(--gold);
+      border: 0;
+      border-radius: 0.7rem;
+      font: inherit;
+      font-size: 1.02rem;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    button[type="submit"]:hover { background: var(--gold-hover); }
+    button[type="submit"]:focus {
+      outline: 0;
+      box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.35);
+    }
+    button[type="submit"]:active { transform: translateY(1px); }
+    .legal {
+      margin: 1.05rem 0 0;
+      text-align: center;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+    }
+    @media (min-width: 720px) {
+      .logo img { height: 42px; }
+      .lead { font-size: 0.86rem; letter-spacing: 0.32em; }
+      .amount { font-size: 10.25rem; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap brand-row">
-      <a class="logo" href="#top" aria-label="AfterRole home">
-        <img src="assets/afterrole-lockup.svg" width="156" height="36" alt="AfterRole">
-      </a>
-      <nav aria-label="On this page">
-        <a href="#request">Claim $50 credit</a>
-        <a href="#categories">Categories</a>
-        <a href="#how">How it works</a>
-        <a href="#who">Who we recruit</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-    </div>
-  </header>
-  <main id="top" class="wrap">
-    <h1>Hire laid-off top-firm talent.</h1>
-    <p class="hero-sub">Remote freelancers, by the hour or by the job.</p>
-    <p class="lede">We’re recruiting laid-off staff from top firms (Big 4, banks, tech) for remote freelance work in coding, design, writing, admin, marketing, and video. We quote a fixed price or an hourly rate before we start, or we tell you we can’t take the job.</p>
-    <div class="voucher-hero" id="credit">
-      <p class="kicker">$50 FOR NEW MEMBERS</p>
-      <p class="terms">Every new member gets a $50 cash voucher. One voucher per new customer, used against their first job. We’ll honour it, and we’ll show it on the quote. The voucher is not redeemable for cash, and you can’t transfer it.</p>
-    </div>
-    <p>As low as $10 per task. A $10 task (AUD) is a short, defined admin job: we enter up to 40 rows from a spreadsheet into a form or template we agree on, with up to four fields per row. Bigger tasks are quoted, as a fixed price or an hourly rate, after we see the brief. In development, design, and writing, our starting hourly rates are often well under typical posted marketplace rates. We don’t claim to be the cheapest in every case.</p>
-    <p class="fine">All prices in AUD. This page is for clients in Australia.</p>
+  <div class="frame">
+    <a class="logo" href="./" aria-label="AfterRole">
+      <img src="assets/afterrole-lockup-light.svg" width="182" height="42" alt="AfterRole">
+    </a>
+    <main class="stage">
+      <h1>
+        <span class="lead">Claim</span>
+        <span class="amount"><span class="curr">$</span>50</span>
+        <span class="lead">credit</span>
+      </h1>
+      <form id="request" action="https://formsubmit.co/7f1a1758cb43c85a47bc56ef2145bf67" method="POST">
+        <input type="hidden" name="_subject" value="AfterRole $50 credit claim (variant B)">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://todanley.github.io/afterrole/thanks.html">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="variant" value="B">
+        <input type="hidden" name="landing_variant" value="B">
+        <input type="hidden" name="brand" value="AfterRole">
+        <input type="hidden" id="utm_source" name="utm_source" value="">
+        <input type="hidden" id="utm_medium" name="utm_medium" value="">
+        <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
+        <input type="hidden" id="utm_content" name="utm_content" value="">
+        <input type="hidden" id="landing_section" name="landing_section" value="">
 
-    <form id="request" action="https://formsubmit.co/7f1a1758cb43c85a47bc56ef2145bf67" method="POST">
-      <input type="hidden" name="_subject" value="AfterRole $50 credit claim (variant B)">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://todanley.github.io/afterrole/thanks.html">
-      <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
-      <input type="hidden" name="variant" value="B">
-      <input type="hidden" name="landing_variant" value="B">
-      <input type="hidden" name="brand" value="AfterRole">
-      <input type="hidden" id="utm_source" name="utm_source" value="">
-      <input type="hidden" id="utm_medium" name="utm_medium" value="">
-      <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
-      <input type="hidden" id="utm_content" name="utm_content" value="">
-      <input type="hidden" id="landing_section" name="landing_section" value="">
+        <label class="sr" for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" placeholder="Email">
+        <input type="hidden" name="_replyto" value="">
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required autocomplete="email">
-      <input type="hidden" name="_replyto" value="">
-
-      <p class="fine">By claiming the credit you agree we may email you about it, and about work you might want done. We don’t sell your details.</p>
-      <button type="submit">Claim my $50 credit</button>
-    </form>
-
-    <h2 id="categories">What we take</h2>
-    <p>These are the main remote categories we quote on. Each job has its own price, based on the brief. The figure on each card is a starting point, not a cap.</p>
-
-    <div class="grid">
-      <article class="cat" id="coding">
-        <h3>Looking for a coding professional?</h3>
-        <p class="rate">From $15/hr</p>
-        <p>Websites, web apps, scripts, WordPress, and small software repairs. Specialist or larger builds are quoted above the starting rate.</p>
-        <a class="ask" href="#request" data-category="coding">Request coding work</a>
-      </article>
-      <article class="cat" id="design">
-        <h3>Looking for a design professional?</h3>
-        <p class="rate">From $15/hr</p>
-        <p>Graphic design, layout, presentation decks, simple brand work, and web or app interface design.</p>
-        <a class="ask" href="#request" data-category="design">Request design work</a>
-      </article>
-      <article class="cat" id="writing">
-        <h3>Looking for a writing or translation professional?</h3>
-        <p class="rate">From $12/hr</p>
-        <p>Web and product copy, articles, listings, and translation, including English and Chinese. We quote by the job when a word count is a better fit than an hourly rate.</p>
-        <a class="ask" href="#request" data-category="writing">Request writing or translation</a>
-      </article>
-      <article class="cat" id="admin">
-        <h3>Looking for an admin or virtual assistant?</h3>
-        <p class="rate">As low as $10 per task</p>
-        <p>For $10, we enter up to 40 rows from a spreadsheet into a form or template we agree on, with up to four fields per row. Inbox help, research, and larger data-entry jobs are quoted.</p>
-        <a class="ask" href="#request" data-category="admin">Request admin support</a>
-      </article>
-      <article class="cat" id="marketing">
-        <h3>Looking for a marketing professional?</h3>
-        <p class="rate">From $12/hr</p>
-        <p>Listing copy, social posts and captions, basic campaign setup, and other remote marketing support. We don’t run ads in your accounts unless the quote says so.</p>
-        <a class="ask" href="#request" data-category="marketing">Request marketing work</a>
-      </article>
-      <article class="cat" id="video">
-        <h3>Looking for a video professional?</h3>
-        <p class="rate">From $15/hr</p>
-        <p>Editing, captions, and short promotional cuts from footage you already have the rights to. A short video is often quoted as a fixed job rather than by the hour.</p>
-        <a class="ask" href="#request" data-category="video">Request video work</a>
-      </article>
-    </div>
-    <p class="src">The “often well under typical posted marketplace rates” line refers to development, design, and writing, compared with USD-posted rates. In a sample of hourly Upwork jobs posted 11 October to 9 November 2026, the median posted midpoint was USD 25/hr for web, mobile and software development, USD 22.50/hr for design and creative, and USD 25/hr for writing. Admin support sat at USD 10/hr, which is why we don’t use that line on the admin card. Our rates are in AUD, so the gap versus those USD figures is wider still. Source: <a href="https://www.upsight.fyi/blog/upwork-hourly-rates-by-category-2026">Upsight, Upwork hourly rates by category (2026)</a>. We are not affiliated with Upwork.</p>
-
-    <h2 id="how">How it works</h2>
-    <ol class="steps">
-      <li>Leave your email to claim the $50 new-member credit.</li>
-      <li>We’ll email you, and you can tell us what you need. We’ll reply with a written scope and a price — hourly or fixed — or we’ll decline. There is no fee for a declined request.</li>
-      <li>If you accept, you pay the quoted amount. The $50 cash voucher comes off your first job. Then we do the work and send it back.</li>
-    </ol>
-    <p>We are a small studio. If we use a contractor for part of a job, the quote and the delivery still come from us. Payment is by card, through a payment link we send after you accept the quote. If that link isn’t ready yet, we’ll say so in the reply and we won’t ask you to pay until it is.</p>
-    <p>Hourly jobs are tracked with desktop time-tracking software. You see the hours logged.</p>
-
-    <h2 id="who">Who we recruit</h2>
-    <p>We’re recruiting laid-off staff from top firms (Big 4, banks, and tech) for remote freelance work. In Australia that is often called being made redundant. We don’t have a public roster yet, and we won’t invent names, headcounts, or the companies people came from.</p>
-    <p>If we can take the job, you’ll get a written quote. If we can’t, we’ll say so. There is no fee for a declined request.</p>
-
-    <h2 id="faq">FAQ</h2>
-    <div class="faq">
-      <details>
-        <summary>Who are the professionals?</summary>
-        <p>We’re recruiting laid-off staff from top firms (Big 4, banks, and tech). We don’t publish a roster, and we don’t name former employers or claim that anyone from a named firm has joined. If we can cover your brief, we’ll quote. If we can’t, we’ll tell you.</p>
-      </details>
-      <details>
-        <summary>Who does the work?</summary>
-        <p>A small studio. We are not a public board of named freelancers. If we use a contractor for part of a job, the quote and the delivery still come from us.</p>
-      </details>
-      <details>
-        <summary>Is this for clients in Australia?</summary>
-        <p>Yes. Prices are in Australian dollars, and this page is for clients in Australia.</p>
-      </details>
-      <details>
-        <summary>Are you the cheapest option?</summary>
-        <p>We don’t claim that. Some small admin tasks are $10, as described on this page. In development, design, and writing, our starting hourly rates are often well under typical USD-posted marketplace figures we checked in late 2026. The quote for your brief is the price that matters.</p>
-      </details>
-      <details>
-        <summary>What do I get for $10?</summary>
-        <p>A defined admin task, in Australian dollars: enter up to 40 rows from a spreadsheet into a form or template we agree on, with up to four fields per row. Anything larger, or work in other categories, is quoted before we start.</p>
-      </details>
-      <details>
-        <summary>How does the $50 cash voucher work?</summary>
-        <p>Leave your email on this page to claim it. Every new member gets a $50 cash voucher, used against their first job. One voucher per new customer. We’ll honour it, and we’ll show it on the quote. It is not redeemable for cash, and you can’t transfer it.</p>
-      </details>
-      <details>
-        <summary>How do I pay?</summary>
-        <p>After you accept a written quote, we send a card payment link for that amount. We don’t take payment before the scope is agreed. If our payment account is still being set up, we’ll tell you in the reply rather than invent another method.</p>
-      </details>
-      <details>
-        <summary>What currency are the rates in?</summary>
-        <p>All prices are in Australian dollars, including starting rates, quotes, and the $50 cash voucher. We are not GST-registered, so GST is not added.</p>
-      </details>
-      <details>
-        <summary>What won’t you take?</summary>
-        <p>In-person local tasks (the kind often posted on local task apps). Writing, completing, or submitting schoolwork, exams, or hiring take-home tests. Videos or files you don’t have the right to use. Promises of sales, search rank, or app-store placement.</p>
-      </details>
-      <details>
-        <summary>Do you have reviews on this site?</summary>
-        <p>Not yet. We won’t invent reviews, ratings, or client stories.</p>
-      </details>
-      <details>
-        <summary>How do I contact you?</summary>
-        <p>Use the form on this page. We don’t publish a phone number.</p>
-      </details>
-    </div>
-  </main>
-  <footer>
-    <div class="wrap">
-      <p>All prices in AUD. We are not GST-registered, so GST is not added. This site does not display reviews we have not received from real clients. We are not affiliated with Upwork or Airtasker.</p>
-      <p>© 2026 AfterRole. Use the form above to reach us.</p>
-    </div>
-  </footer>
+        <button type="submit">Claim my $50 credit</button>
+        <p class="legal">New members. Credit applies to first order.</p>
+      </form>
+    </main>
+  </div>
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
@@ -333,11 +236,10 @@
       var hash = (window.location.hash || "").replace("#", "");
       var category = params.get("category") || params.get("utm_content") || hash;
       var allowed = { coding: 1, design: 1, writing: 1, admin: 1, marketing: 1, video: 1, other: 1 };
-      var navHash = { top: 1, credit: 1, request: 1, categories: 1, how: 1, who: 1, faq: 1, human: 1 };
       var sectionField = document.getElementById("landing_section");
       if (category && allowed[category] && sectionField) {
         sectionField.value = category;
-      } else if (sectionField && hash && !navHash[hash]) {
+      } else if (sectionField && hash && hash !== "request") {
         sectionField.value = hash;
       }
 
@@ -346,13 +248,6 @@
       function sync() { if (email && reply) reply.value = email.value; }
       if (email) email.addEventListener("input", sync);
       sync();
-
-      document.querySelectorAll("a.ask[data-category]").forEach(function (a) {
-        a.addEventListener("click", function () {
-          var cat = a.getAttribute("data-category");
-          if (sectionField && allowed[cat]) sectionField.value = cat;
-        });
-      });
     })();
   </script>
 </body>
