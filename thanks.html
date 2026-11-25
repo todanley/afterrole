@@ -56,6 +56,50 @@
     }
     p span { color: var(--gold); }
     p .break { display: block; height: 0.45em; }
+    .intent { width: 100%; margin-top: 2.15rem; }
+    .intent .prompt {
+      margin: 0 0 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: rgba(243, 238, 228, 0.68);
+    }
+    .choices {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .choices button {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      min-height: 3.2rem;
+      padding: 0.75rem 1rem;
+      color: var(--cream);
+      background: rgba(243, 238, 228, 0.05);
+      border: 1px solid rgba(243, 238, 228, 0.28);
+      border-radius: 0.7rem;
+      font: inherit;
+      font-size: 1.02rem;
+      font-weight: 600;
+      line-height: 1.3;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+    .choices button:hover,
+    .choices button:focus {
+      outline: 0;
+      border-color: var(--gold);
+      background: rgba(224, 178, 92, 0.14);
+      box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.22);
+    }
+    .choices button:active { transform: translateY(1px); }
+    .choices button:disabled { cursor: default; opacity: 0.65; }
+    .done {
+      margin: 2.15rem 0 0;
+      font-size: 1.05rem;
+      color: var(--gold);
+    }
     @media (min-width: 720px) {
       .logo img { height: 42px; }
     }
@@ -68,7 +112,115 @@
     </a>
     <main>
       <p>Your <span>$50</span> credit is reserved.<span class="break"></span>We’ll email you.</p>
+      <div class="intent" id="intent-prompt">
+        <p class="prompt">One quick tap:</p>
+        <div class="choices">
+          <button type="button" data-intent="hire">I want to hire a pro</button>
+          <button type="button" data-intent="work">I’m looking for work</button>
+        </div>
+      </div>
+      <p class="done" id="intent-done" hidden>Thanks — noted.</p>
     </main>
   </div>
+  <script>
+    (function () {
+      var ENDPOINT = "https://formsubmit.co/ajax/7f1a1758cb43c85a47bc56ef2145bf67";
+      var FALLBACK = "https://formsubmit.co/7f1a1758cb43c85a47bc56ef2145bf67";
+      var BRAND = "AfterRole";
+      var VARIANT = "B";
+      var PREFIX = "ar_";
+
+      function storeGet(key) {
+        try { return sessionStorage.getItem(PREFIX + key) || localStorage.getItem(PREFIX + key) || ""; }
+        catch (e) { return ""; }
+      }
+
+      function readEmail() {
+        var params = new URLSearchParams(window.location.search);
+        return (params.get("email") || storeGet("claim_email") || "").trim();
+      }
+
+      function readField(name) {
+        var params = new URLSearchParams(window.location.search);
+        return (params.get(name) || storeGet(name) || "").trim();
+      }
+
+      function showThanks() {
+        var prompt = document.getElementById("intent-prompt");
+        var confirm = document.getElementById("intent-done");
+        if (prompt) prompt.hidden = true;
+        if (confirm) confirm.hidden = false;
+      }
+
+      function fallbackPost(payload) {
+        var iframe = document.createElement("iframe");
+        iframe.name = "intent_fallback";
+        iframe.setAttribute("title", "Intent fallback");
+        iframe.style.display = "none";
+        document.body.appendChild(iframe);
+        var form = document.createElement("form");
+        form.method = "POST";
+        form.action = FALLBACK;
+        form.target = "intent_fallback";
+        form.style.display = "none";
+        Object.keys(payload).forEach(function (k) {
+          var input = document.createElement("input");
+          input.type = "hidden";
+          input.name = k;
+          input.value = payload[k] == null ? "" : String(payload[k]);
+          form.appendChild(input);
+        });
+        document.body.appendChild(form);
+        form.submit();
+      }
+
+      function sendIntent(intent) {
+        var email = readEmail();
+        var payload = {
+          _subject: "Intent: " + intent + " (" + BRAND + " " + VARIANT + ")",
+          _template: "table",
+          _captcha: "false",
+          intent: intent,
+          email: email,
+          variant: VARIANT,
+          landing_variant: VARIANT,
+          brand: BRAND,
+          utm_source: readField("utm_source"),
+          utm_medium: readField("utm_medium"),
+          utm_campaign: readField("utm_campaign"),
+          utm_content: readField("utm_content")
+        };
+        if (email) payload._replyto = email;
+
+        var buttons = document.querySelectorAll("[data-intent]");
+        buttons.forEach(function (b) { b.disabled = true; });
+
+        fetch(ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        }).then(function (res) {
+          if (!res.ok) throw new Error("bad status");
+          return res.json().catch(function () { return {}; });
+        }).then(function () {
+          try { sessionStorage.setItem(PREFIX + "intent", intent); } catch (e) {}
+          showThanks();
+        }).catch(function () {
+          fallbackPost(payload);
+          try { sessionStorage.setItem(PREFIX + "intent", intent); } catch (e) {}
+          showThanks();
+        });
+      }
+
+      document.querySelectorAll("[data-intent]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          sendIntent(btn.getAttribute("data-intent"));
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
