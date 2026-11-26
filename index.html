@@ -85,7 +85,7 @@
     .btn .plus { font-size: 1.35em; line-height: 1; font-weight: 500; margin-top: -0.06em; }
 
     /* Hero */
-    .hero { padding: 3rem 0 2.5rem; text-align: center; }
+    .hero { padding: 2.25rem 0 2.25rem; text-align: center; }
     .eyebrow {
       display: inline-block; margin: 0 0 1.1rem; padding: 0.35rem 0.8rem;
       border: 1px solid rgba(224, 178, 92, 0.35); border-radius: 999px;
@@ -98,10 +98,26 @@
     .hero h1 em { font-style: normal; color: var(--gold); }
     .hero .sub { margin: 1.1rem auto 0; max-width: 34rem; color: var(--soft); font-size: 1.08rem; }
     .hero .position { margin: 0.9rem auto 0; color: var(--muted); font-size: 0.92rem; letter-spacing: 0.01em; }
-    .cta-row { display: flex; justify-content: center; margin-top: 2rem; }
-    .cta-row .btn-xl { width: 100%; max-width: 22rem; }
+    .offer-badge {
+      display: inline-flex; flex-direction: column; align-items: center;
+      margin: 0 0 1.25rem; padding: 0.7rem 1.5rem 0.75rem;
+      background: var(--gold); color: var(--ink);
+      border-radius: 20px;
+      box-shadow: 0 12px 36px rgba(227, 182, 95, 0.4);
+    }
+    .offer-badge .amt {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 800; letter-spacing: -0.045em; line-height: 0.95;
+    }
+    .offer-badge .for {
+      margin-top: 0.2rem;
+      font-size: 0.82rem; font-weight: 650; letter-spacing: 0.01em;
+    }
+    .cta-row { display: flex; justify-content: center; margin-top: 1.75rem; }
+    .cta-row .btn-xl { width: 100%; max-width: 28rem; }
     .credit-note { margin: 1rem 0 0; font-size: 0.86rem; color: var(--soft); }
     .credit-note strong { color: var(--gold); font-weight: 650; }
+    .dlg-offer { margin: 0.2rem 0 0; color: var(--gold); font-size: 0.95rem; font-weight: 650; }
 
     /* How it works */
     .steps { display: grid; gap: 0.75rem; margin: 0.5rem 0 3rem; padding: 0; list-style: none; counter-reset: s; }
@@ -209,7 +225,7 @@
     dialog::backdrop { background: rgba(4, 8, 12, 0.72); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
     dialog[open] { animation: up 0.22s ease-out; }
     @keyframes up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
-    .dlg-head { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.25rem 0.25rem; }
+    .dlg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; padding: 1.1rem 1.25rem 0.25rem; }
     .dlg-head h2 { margin: 0; font-size: 1.35rem; letter-spacing: -0.015em; }
     .x { appearance: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-2); background: transparent; color: var(--cream); font-size: 1.3rem; line-height: 1; cursor: pointer; }
     .x:hover { border-color: var(--gold); }
@@ -252,12 +268,16 @@
       .feed-head { flex-direction: row; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; }
       .disclaimer { flex-basis: 100%; }
     }
+    @media (max-width: 399px) {
+      .cta-row .btn-xl, .sticky .btn { font-size: 1.02rem; padding-left: 1rem; padding-right: 1rem; }
+    }
     @media (min-width: 900px) {
       body { padding-bottom: 0; }
       .sticky { display: none; }
       .nav a.link { display: inline; }
-      .hero { padding: 5rem 0 3.5rem; }
+      .hero { padding: 4.25rem 0 3.25rem; }
       .hero h1 { max-width: 17ch; }
+      .offer-badge { margin-bottom: 1.5rem; padding: 0.9rem 2.1rem 1rem; }
       .grid { grid-template-columns: repeat(3, 1fr); }
       .filters { margin: 0; padding-left: 0; padding-right: 0; }
     }
@@ -279,12 +299,15 @@
   <main>
     <section class="hero">
       <div class="wrap">
-        <p class="eyebrow">Remote tasks · Australia</p>
+        <p class="offer-badge">
+          <span class="amt">$50 OFF</span>
+          <span class="for">your first order · new members</span>
+        </p>
         <h1>Small jobs done by <em>experienced pros</em>, for less.</h1>
         <p class="sub">Post a remote task, name your budget, and compare quotes from experienced pros.</p>
         <p class="position">Top-firm talent, between roles. Rates well below market. From $10 a task.</p>
         <div class="cta-row">
-          <button class="btn btn-gold btn-xl" type="button" data-open-post><span class="plus">+</span> Post a task</button>
+          <button class="btn btn-gold btn-xl" type="button" data-open-post><span class="plus">+</span> Post a task — get $50 off</button>
         </div>
         <p class="credit-note">Free to post. New members get <strong>$50 credit</strong> on their first order.</p>
       </div>
@@ -322,12 +345,15 @@
   </footer>
 
   <div class="sticky" id="sticky">
-    <button class="btn btn-gold" type="button" data-open-post><span class="plus">+</span> Post a task</button>
+    <button class="btn btn-gold" type="button" data-open-post><span class="plus">+</span> Post a task — get $50 off</button>
   </div>
 
   <dialog id="post" aria-labelledby="post-title">
     <div class="dlg-head">
-      <h2 id="post-title">Post a task</h2>
+      <div>
+        <h2 id="post-title">Post a task</h2>
+        <p class="dlg-offer">$50 off your first order</p>
+      </div>
       <button class="x" type="button" id="close-post" aria-label="Close">×</button>
     </div>
     <div class="dlg-body">
