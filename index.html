@@ -79,8 +79,6 @@
     .btn:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.4); }
     .btn-gold { background: var(--gold); color: var(--ink); }
     .btn-gold:hover { background: var(--gold-hover); }
-    .btn-ghost { background: transparent; color: var(--cream); border: 1px solid var(--line-2); }
-    .btn-ghost:hover { border-color: var(--gold); background: rgba(224, 178, 92, 0.08); }
     .btn-sm { height: 40px; padding: 0 1.1rem; font-size: 0.92rem; }
     .btn-lg { height: 60px; padding: 0 2rem; font-size: 1.12rem; }
     .btn-xl { height: 66px; padding: 0 2.4rem; font-size: 1.2rem; box-shadow: 0 10px 40px rgba(227, 182, 95, 0.28); }
@@ -100,9 +98,8 @@
     .hero h1 em { font-style: normal; color: var(--gold); }
     .hero .sub { margin: 1.1rem auto 0; max-width: 34rem; color: var(--soft); font-size: 1.08rem; }
     .hero .position { margin: 0.9rem auto 0; color: var(--muted); font-size: 0.92rem; letter-spacing: 0.01em; }
-    .cta-row { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-top: 2rem; }
+    .cta-row { display: flex; justify-content: center; margin-top: 2rem; }
     .cta-row .btn-xl { width: 100%; max-width: 22rem; }
-    .cta-row .btn-ghost { width: 100%; max-width: 22rem; height: 54px; font-size: 1rem; }
     .credit-note { margin: 1rem 0 0; font-size: 0.86rem; color: var(--soft); }
     .credit-note strong { color: var(--gold); font-weight: 650; }
 
@@ -247,9 +244,7 @@
     .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 
     @media (min-width: 640px) {
-      .cta-row { flex-direction: row; justify-content: center; }
-      .cta-row .btn-xl, .cta-row .btn-ghost { width: auto; }
-      .cta-row .btn-ghost { height: 66px; padding: 0 1.8rem; }
+      .cta-row .btn-xl { width: auto; }
       .steps { grid-template-columns: repeat(3, 1fr); }
       .grid { grid-template-columns: repeat(2, 1fr); }
       .row2 { grid-template-columns: 1fr 1fr; }
@@ -290,7 +285,6 @@
         <p class="position">Top-firm talent, between roles. Rates well below market. From $10 a task.</p>
         <div class="cta-row">
           <button class="btn btn-gold btn-xl" type="button" data-open-post><span class="plus">+</span> Post a task</button>
-          <a class="btn btn-ghost" href="#examples">See example tasks</a>
         </div>
         <p class="credit-note">Free to post. New members get <strong>$50 credit</strong> on their first order.</p>
       </div>
@@ -299,7 +293,7 @@
     <section id="how" class="wrap" aria-label="How it works">
       <ol class="steps">
         <li><b>Describe the job</b>A few lines and your budget in AUD. Takes about a minute.</li>
-        <li><b>Get quotes by email</b>Pros reply with a price and how they would do it.</li>
+        <li><b>Get quotes</b>Pros reply with a price and how they would do it.</li>
         <li><b>Pick one</b>You choose who does it. Your $50 credit comes off the first order.</li>
       </ol>
     </section>
@@ -393,29 +387,28 @@
     (function () {
       // Illustrative examples only. Not real listings, people or offers.
       var TASKS = [
-        { cat: "Web/site fixes", title: "Contact form on WordPress site stopped sending", desc: "Messages from the form never arrive. Need it fixed and tested.", budget: 40, ago: "2 hours ago", status: "open",
+        { cat: "Web/site fixes", title: "Contact form on WordPress site stopped sending", desc: "Messages from the form never arrive. Need it fixed and tested.", budget: 40, status: "open",
           offers: [["A$35", "Ex-agency WordPress developer", "Usually an SMTP setting. I’d check that first, then send a test to you."], ["A$40", "Former in-house web developer", "Fix plus a short note on what broke so it’s easy to spot next time."]] },
-        { cat: "Data & spreadsheets", title: "Dedupe a 2,400-row customer list in Excel", desc: "Same customers entered twice with slightly different spellings.", budget: 40, ago: "5 hours ago", status: "open",
+        { cat: "Data & spreadsheets", title: "Dedupe a 2,400-row customer list in Excel", desc: "Same customers entered twice with slightly different spellings.", budget: 40, status: "open",
           offers: [["A$30", "Former bank data analyst", "Match on email and phone, then flag near-duplicates for you to confirm."], ["A$35", "Ex-consulting analyst", "Cleaned file plus a tab listing every row I merged."]] },
-        { cat: "Design", title: "Turn quarterly numbers into a 6-slide deck", desc: "Figures are in a spreadsheet. Need clean charts for a board update.", budget: 80, ago: "1 day ago", status: "assigned",
+        { cat: "Design", title: "Turn quarterly numbers into a 6-slide deck", desc: "Figures are in a spreadsheet. Need clean charts for a board update.", budget: 80, status: "assigned",
           offers: [["A$70", "Former strategy consultant", "Six slides in your template, one chart per slide, notes on each.", true], ["A$75", "Ex-agency presentation designer", "Can match your brand colours and send PowerPoint and PDF."]] },
-        { cat: "Writing & editing", title: "Proofread 3,000 words of website copy", desc: "Australian English. Five pages, mostly service descriptions.", budget: 50, ago: "1 day ago", status: "assigned",
+        { cat: "Writing & editing", title: "Proofread 3,000 words of website copy", desc: "Australian English. Five pages, mostly service descriptions.", budget: 50, status: "assigned",
           offers: [["A$40", "Former in-house editor at a publisher", "Tracked changes in Google Docs, with queries in comments.", true], ["A$45", "Ex-corporate comms manager", "Proofread plus suggestions where a sentence runs long."]] },
-        { cat: "Admin/research", title: "Find 30 packaging suppliers in NSW and VIC", desc: "Name, website, minimum order and contact email in a sheet.", budget: 45, ago: "3 hours ago", status: "open",
+        { cat: "Admin/research", title: "Find 30 packaging suppliers in NSW and VIC", desc: "Name, website, minimum order and contact email in a sheet.", budget: 45, status: "open",
           offers: [["A$35", "Former procurement coordinator", "I’ll check each website for minimum order, not just directory listings."], ["A$45", "Ex-operations manager", "30 suppliers plus a short note on the five that look best."]] },
-        { cat: "Data & spreadsheets", title: "Google Sheet that flags overdue invoices", desc: "Highlight anything unpaid after 30 days and total it by client.", budget: 25, ago: "6 hours ago", status: "open",
+        { cat: "Data & spreadsheets", title: "Google Sheet that flags overdue invoices", desc: "Highlight anything unpaid after 30 days and total it by client.", budget: 25, status: "open",
           offers: [["A$20", "Former finance analyst", "Conditional formatting plus a summary tab by client."], ["A$25", "Ex-accounting firm associate", "Can add an aged-debt view (30/60/90 days) as well."]] },
-        { cat: "Writing & editing", title: "Write three product descriptions", desc: "Skincare range, about 100 words each, plain and factual.", budget: 20, ago: "4 hours ago", status: "open",
+        { cat: "Writing & editing", title: "Write three product descriptions", desc: "Skincare range, about 100 words each, plain and factual.", budget: 20, status: "open",
           offers: [["A$15", "Ex-agency copywriter", "I’ll stick to what’s on the label and avoid health claims."], ["A$20", "Former retail marketing coordinator", "Three descriptions plus a short SEO title for each."]] },
-        { cat: "Admin/research", title: "Set up Gmail filters and an out-of-office reply", desc: "Shared inbox gets messy. Want labels for invoices, orders and support.", budget: 15, ago: "8 hours ago", status: "open",
+        { cat: "Admin/research", title: "Set up Gmail filters and an out-of-office reply", desc: "Shared inbox gets messy. Want labels for invoices, orders and support.", budget: 15, status: "open",
           offers: [["A$10", "Former IT support lead", "Labels, three filters and the auto-reply. About 20 minutes over a screen share."], ["A$15", "Ex-executive assistant", "Same setup plus a one-page guide for your team."]] },
-        { cat: "Web/site fixes", title: "Mobile menu won’t open on Squarespace site", desc: "Works on desktop. On phones the menu icon does nothing.", budget: 60, ago: "1 day ago", status: "assigned",
+        { cat: "Web/site fixes", title: "Mobile menu won’t open on Squarespace site", desc: "Works on desktop. On phones the menu icon does nothing.", budget: 60, status: "assigned",
           offers: [["A$45", "Ex-agency front-end developer", "Likely a custom code block clashing with the template. I’d test on iOS and Android.", true], ["A$55", "Former in-house web developer at a retailer", "Fix plus a check of the other pages on mobile."]] }
       ];
 
       function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
       var pin = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 0-4.5 4.5c0 3.4 4.5 8.5 4.5 8.5s4.5-5.1 4.5-8.5A4.5 4.5 0 0 0 8 1.5Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6" r="1.6" fill="currentColor"/></svg>';
-      var clock = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.6V8l2.3 1.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
 
       var feed = document.getElementById("feed");
       feed.innerHTML = TASKS.map(function (t, i) {
@@ -424,7 +417,7 @@
           '<div class="card-top"><div class="chips"><span class="chip chip-ex">Example</span><span class="chip chip-cat">' + esc(t.cat) + '</span></div>' +
           '<span class="status ' + t.status + '">' + (t.status === "open" ? "Open" : "Assigned") + '</span></div>' +
           '<h3>' + esc(t.title) + '</h3><p class="desc">' + esc(t.desc) + '</p>' +
-          '<div class="meta"><span>' + pin + 'Remote</span><span>' + clock + 'Posted ' + esc(t.ago) + '</span>' +
+          '<div class="meta"><span>' + pin + 'Remote</span>' +
           '<span class="budget"><small>Budget</small>A$' + t.budget + '</span></div>' +
           '<p class="offers-label">' + n + (n === 1 ? ' quote' : ' quotes') + '</p>' +
           '<ul class="offers">' + t.offers.map(function (o) {
