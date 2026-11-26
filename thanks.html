@@ -111,7 +111,7 @@
       <img src="assets/afterrole-lockup-light.svg" width="182" height="42" alt="AfterRole">
     </a>
     <main>
-      <p>Your <span>$50</span> credit is reserved.<span class="break"></span>We’ll email you.</p>
+      <p id="msg">Your <span>$50</span> credit is reserved.<span class="break"></span>We’ll email you.</p>
       <div class="intent" id="intent-prompt">
         <p class="prompt">One quick tap:</p>
         <div class="choices">
@@ -127,8 +127,17 @@
       var ENDPOINT = "https://formsubmit.co/ajax/7f1a1758cb43c85a47bc56ef2145bf67";
       var FALLBACK = "https://formsubmit.co/7f1a1758cb43c85a47bc56ef2145bf67";
       var BRAND = "AfterRole";
-      var VARIANT = "B";
       var PREFIX = "ar_";
+      var QS = new URLSearchParams(window.location.search);
+      var VARIANT = "B";
+      try { VARIANT = QS.get("variant") || sessionStorage.getItem(PREFIX + "variant") || "B"; } catch (e) { VARIANT = QS.get("variant") || "B"; }
+      if (!/^[A-Za-z0-9]{1,4}$/.test(VARIANT)) VARIANT = "B";
+      if (QS.get("posted") === "1") {
+        var msg = document.getElementById("msg");
+        if (msg) msg.innerHTML = 'Your task is posted.<span class="break"></span>We’ll email you quotes. Your <span>$50</span> credit is reserved.';
+        var ip = document.getElementById("intent-prompt");
+        if (ip) ip.hidden = true;
+      }
 
       function storeGet(key) {
         try { return sessionStorage.getItem(PREFIX + key) || localStorage.getItem(PREFIX + key) || ""; }

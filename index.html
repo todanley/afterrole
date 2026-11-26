@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>AfterRole — Claim $50 credit</title>
-  <meta name="description" content="Claim a $50 new-member credit. It applies to your first order.">
+  <title>AfterRole — Post a task, get quotes from experienced pros</title>
+  <meta name="description" content="Post a remote task and get quotes from experienced pros who are between roles. Rates well below market. From $10 a task.">
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#0B131C">
   <meta name="color-scheme" content="dark">
@@ -12,274 +12,492 @@
   <link rel="icon" href="assets/favicon.ico" sizes="any">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/afterrole-icon-180.png">
-  <meta property="og:title" content="AfterRole — Claim $50 credit">
-  <meta property="og:description" content="Claim a $50 new-member credit. It applies to your first order.">
+  <meta property="og:title" content="AfterRole — Post a task, get quotes from experienced pros">
+  <meta property="og:description" content="Top-firm talent, between roles. Rates well below market. From $10 a task.">
   <meta property="og:image" content="https://todanley.github.io/afterrole/assets/afterrole-icon-512.png">
   <meta property="og:url" content="https://todanley.github.io/afterrole/">
   <style>
     :root {
       --bg: #0B131C;
+      --bg-2: #101B26;
+      --card: #131F2B;
+      --card-hi: #172534;
       --cream: #F3EEE4;
+      --soft: rgba(243, 238, 228, 0.74);
+      --muted: #8E8A84;
       --gold: #E3B65F;
       --gold-hover: #ECCA7C;
+      --green: #7FC8A9;
       --ink: #0B131C;
-      --muted: #8B8680;
+      --line: rgba(243, 238, 228, 0.12);
+      --line-2: rgba(243, 238, 228, 0.2);
       --field: rgba(243, 238, 228, 0.05);
-      --line: rgba(243, 238, 228, 0.18);
-      --focus: #E0B25C;
+      --radius: 16px;
     }
     * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; }
     body {
-      min-height: 100dvh;
       color: var(--cream);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
       font-size: 16px;
-      line-height: 1.4;
+      line-height: 1.5;
       background-color: var(--bg);
       background-image:
-        radial-gradient(ellipse 90% 55% at 50% 36%, rgba(224, 178, 92, 0.13), transparent 62%),
-        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(16, 36, 40, 0.65), transparent 70%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.93 0 0 0 0 0.88 0 0 0 0.045 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-attachment: fixed;
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(224, 178, 92, 0.12), transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.93 0 0 0 0 0.88 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: no-repeat, repeat;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: calc(5.5rem + env(safe-area-inset-bottom));
     }
-    .frame {
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: max(1.75rem, env(safe-area-inset-top)) 1.5rem max(1.75rem, env(safe-area-inset-bottom));
+    a { color: inherit; }
+    .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 1.25rem; }
+
+    /* Header */
+    header.top {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(11, 19, 28, 0.82);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
     }
-    .logo {
-      display: block;
-      flex: 0 0 auto;
+    header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo img { display: block; height: 32px; width: auto; }
+    .nav { display: flex; align-items: center; gap: 1.25rem; }
+    .nav a.link { text-decoration: none; color: var(--soft); font-size: 0.94rem; display: none; }
+    .nav a.link:hover { color: var(--cream); }
+
+    /* Buttons */
+    .btn {
+      appearance: none; -webkit-appearance: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      border: 0; border-radius: 999px; cursor: pointer;
+      font: inherit; font-weight: 650; letter-spacing: 0.005em; text-decoration: none;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
     }
-    .logo img {
-      display: block;
-      height: 38px;
-      width: auto;
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.4); }
+    .btn-gold { background: var(--gold); color: var(--ink); }
+    .btn-gold:hover { background: var(--gold-hover); }
+    .btn-ghost { background: transparent; color: var(--cream); border: 1px solid var(--line-2); }
+    .btn-ghost:hover { border-color: var(--gold); background: rgba(224, 178, 92, 0.08); }
+    .btn-sm { height: 40px; padding: 0 1.1rem; font-size: 0.92rem; }
+    .btn-lg { height: 60px; padding: 0 2rem; font-size: 1.12rem; }
+    .btn-xl { height: 66px; padding: 0 2.4rem; font-size: 1.2rem; box-shadow: 0 10px 40px rgba(227, 182, 95, 0.28); }
+    .btn .plus { font-size: 1.35em; line-height: 1; font-weight: 500; margin-top: -0.06em; }
+
+    /* Hero */
+    .hero { padding: 3rem 0 2.5rem; text-align: center; }
+    .eyebrow {
+      display: inline-block; margin: 0 0 1.1rem; padding: 0.35rem 0.8rem;
+      border: 1px solid rgba(224, 178, 92, 0.35); border-radius: 999px;
+      color: var(--gold); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em;
     }
-    .stage {
-      flex: 1 1 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      max-width: 26rem;
-      padding: 1.5rem 0 0.5rem;
+    .hero h1 {
+      margin: 0 auto; max-width: 15ch;
+      font-size: clamp(2.3rem, 9vw, 4.1rem); line-height: 1.04; font-weight: 700; letter-spacing: -0.03em;
     }
-    h1 {
-      margin: 0 0 0.7rem;
-      text-align: center;
-      font-weight: 500;
+    .hero h1 em { font-style: normal; color: var(--gold); }
+    .hero .sub { margin: 1.1rem auto 0; max-width: 34rem; color: var(--soft); font-size: 1.08rem; }
+    .hero .position { margin: 0.9rem auto 0; color: var(--muted); font-size: 0.92rem; letter-spacing: 0.01em; }
+    .cta-row { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-top: 2rem; }
+    .cta-row .btn-xl { width: 100%; max-width: 22rem; }
+    .cta-row .btn-ghost { width: 100%; max-width: 22rem; height: 54px; font-size: 1rem; }
+    .credit-note { margin: 1rem 0 0; font-size: 0.86rem; color: var(--soft); }
+    .credit-note strong { color: var(--gold); font-weight: 650; }
+
+    /* How it works */
+    .steps { display: grid; gap: 0.75rem; margin: 0.5rem 0 3rem; padding: 0; list-style: none; counter-reset: s; }
+    .steps li {
+      counter-increment: s; position: relative;
+      padding: 1rem 1rem 1rem 3.4rem; background: rgba(243, 238, 228, 0.03);
+      border: 1px solid var(--line); border-radius: var(--radius); color: var(--soft); font-size: 0.95rem;
     }
-    .tagline {
-      margin: 0 0 1.85rem;
-      text-align: center;
-      font-size: 0.84rem;
-      font-weight: 400;
-      line-height: 1.5;
-      letter-spacing: 0.01em;
-      color: var(--muted);
+    .steps li::before {
+      content: counter(s); position: absolute; left: 1rem; top: 1rem;
+      width: 1.75rem; height: 1.75rem; border-radius: 50%;
+      display: grid; place-items: center; background: rgba(224, 178, 92, 0.15); color: var(--gold);
+      font-weight: 700; font-size: 0.9rem;
     }
-    .lead {
-      display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--cream);
+    .steps li b { display: block; color: var(--cream); font-weight: 650; margin-bottom: 0.1rem; }
+
+    /* Feed */
+    .feed-head { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1.25rem; }
+    .feed-head h2 { margin: 0; font-size: 1.6rem; letter-spacing: -0.02em; }
+    .disclaimer {
+      display: flex; gap: 0.6rem; align-items: flex-start; margin: 0.4rem 0 0;
+      padding: 0.75rem 0.9rem; border-radius: 12px;
+      background: rgba(224, 178, 92, 0.08); border: 1px solid rgba(224, 178, 92, 0.25);
+      color: var(--cream); font-size: 0.9rem;
     }
-    .amount {
-      display: block;
-      margin: 0.18em 0 0.14em;
-      color: var(--gold);
-      font-size: clamp(6.4rem, 32vw, 10.25rem);
-      font-weight: 650;
-      letter-spacing: -0.045em;
-      line-height: 0.86;
-      font-variant-numeric: lining-nums;
-      background-image: linear-gradient(180deg, #F6E1A6 0%, #E3B65F 48%, #C79238 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 54px rgba(227, 182, 95, 0.32));
+    .disclaimer svg { flex: 0 0 auto; margin-top: 0.15rem; }
+    .filters { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.25rem 0 1rem; margin: 0 -1.25rem; padding-left: 1.25rem; padding-right: 1.25rem; scrollbar-width: none; }
+    .filters::-webkit-scrollbar { display: none; }
+    .filters button {
+      flex: 0 0 auto; appearance: none; cursor: pointer; font: inherit; font-size: 0.86rem; font-weight: 550;
+      height: 36px; padding: 0 0.95rem; border-radius: 999px;
+      color: var(--soft); background: transparent; border: 1px solid var(--line-2);
     }
-    .amount .curr {
-      font-size: 0.46em;
-      font-weight: 600;
-      letter-spacing: 0;
-      margin-right: 0.02em;
-      position: relative;
-      top: -0.38em;
-    }
-    form { width: 100%; }
-    .hp {
-      position: absolute;
-      left: -10000px;
-      top: auto;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-    }
-    .sr {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-    input[type="email"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 100%;
-      height: 3.35rem;
-      margin: 0;
-      padding: 0 1rem;
-      color: var(--cream);
-      background: var(--field);
+    .filters button[aria-pressed="true"] { color: var(--ink); background: var(--cream); border-color: var(--cream); }
+
+    .grid { display: grid; gap: 1rem; }
+    .card {
+      position: relative; display: flex; flex-direction: column;
+      padding: 1.15rem 1.15rem 1rem; border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card-hi), var(--card));
       border: 1px solid var(--line);
-      border-radius: 0.7rem;
-      font: inherit;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      transition: border-color 0.15s ease, transform 0.15s ease;
     }
-    input[type="email"]::placeholder { color: rgba(243, 238, 228, 0.52); }
-    input[type="email"]:hover { border-color: rgba(243, 238, 228, 0.32); }
-    input[type="email"]:focus {
-      border-color: var(--gold);
-      background: rgba(243, 238, 228, 0.07);
-      box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.22);
+    .card:hover { border-color: var(--line-2); }
+    .card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.7rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .chip {
+      display: inline-flex; align-items: center; height: 24px; padding: 0 0.6rem; border-radius: 999px;
+      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap;
     }
-    button[type="submit"] {
-      appearance: none;
-      width: 100%;
-      height: 3.35rem;
-      margin: 0.7rem 0 0;
-      padding: 0 1rem;
-      color: var(--ink);
-      background: var(--gold);
-      border: 0;
-      border-radius: 0.7rem;
-      font: inherit;
-      font-size: 1.02rem;
-      font-weight: 650;
-      letter-spacing: 0.01em;
-      cursor: pointer;
-      transition: background 0.15s ease, transform 0.1s ease;
+    .chip-cat { background: rgba(243, 238, 228, 0.08); color: var(--soft); }
+    .chip-ex { background: transparent; color: var(--gold); border: 1px dashed rgba(224, 178, 92, 0.6); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.66rem; }
+    .status { font-size: 0.78rem; font-weight: 650; display: inline-flex; align-items: center; gap: 0.35rem; white-space: nowrap; }
+    .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .status.open { color: var(--green); }
+    .status.assigned { color: var(--muted); }
+    .card h3 { margin: 0; font-size: 1.08rem; line-height: 1.3; font-weight: 650; letter-spacing: -0.005em; }
+    .card .desc { margin: 0.4rem 0 0; color: var(--soft); font-size: 0.9rem; }
+    .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 1rem; margin: 0.85rem 0 0; color: var(--muted); font-size: 0.82rem; }
+    .meta span { display: inline-flex; align-items: center; gap: 0.3rem; }
+    .budget { margin-left: auto; color: var(--cream); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+    .budget small { color: var(--muted); font-weight: 500; font-size: 0.72rem; margin-right: 0.25rem; letter-spacing: 0.02em; text-transform: uppercase; }
+    .offers { margin: 0.95rem 0 0; padding: 0.85rem 0 0; border-top: 1px solid var(--line); list-style: none; display: grid; gap: 0.6rem; }
+    .offers-label { margin: 0.95rem 0 -0.35rem; padding-top: 0.85rem; border-top: 1px solid var(--line); font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .offers-label + .offers { border-top: 0; padding-top: 0.6rem; margin-top: 0; }
+    .offer { display: grid; grid-template-columns: auto 1fr; gap: 0.15rem 0.75rem; align-items: baseline; }
+    .offer .price { grid-row: span 2; min-width: 4.4rem; padding: 0.3rem 0.5rem; border-radius: 8px; text-align: center; background: rgba(224, 178, 92, 0.1); color: var(--gold); font-weight: 700; font-size: 0.95rem; align-self: start; }
+    .offer .role { font-size: 0.86rem; font-weight: 600; color: var(--cream); }
+    .offer .pitch { font-size: 0.84rem; color: var(--soft); }
+    .offer.chosen .price { background: var(--gold); color: var(--ink); }
+    .offer.chosen .role::after { content: "Accepted"; margin-left: 0.45rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--green); }
+    .card .similar {
+      margin-top: 1rem; align-self: flex-start; appearance: none; background: none; border: 0; padding: 0;
+      color: var(--gold); font: inherit; font-size: 0.88rem; font-weight: 600; cursor: pointer;
     }
-    button[type="submit"]:hover { background: var(--gold-hover); }
-    button[type="submit"]:focus {
-      outline: 0;
-      box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.35);
+    .card .similar:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    /* Bottom CTA band */
+    .band {
+      margin: 3rem 0 1rem; padding: 2rem 1.25rem; text-align: center; border-radius: 22px;
+      background: radial-gradient(ellipse 80% 120% at 50% 0%, rgba(224, 178, 92, 0.16), transparent 70%), var(--bg-2);
+      border: 1px solid rgba(224, 178, 92, 0.22);
     }
-    button[type="submit"]:active { transform: translateY(1px); }
-    .legal {
-      margin: 1.05rem 0 0;
-      text-align: center;
-      font-size: 0.75rem;
-      line-height: 1.45;
-      letter-spacing: 0.01em;
-      color: var(--muted);
+    .band h2 { margin: 0; font-size: 1.6rem; letter-spacing: -0.02em; }
+    .band p { margin: 0.5rem auto 1.4rem; max-width: 30rem; color: var(--soft); }
+    footer { padding: 1.5rem 0 2rem; color: var(--muted); font-size: 0.8rem; text-align: center; }
+    footer a { color: var(--soft); }
+
+    /* Sticky mobile CTA */
+    .sticky {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+      padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, rgba(11, 19, 28, 0), rgba(11, 19, 28, 0.94) 35%);
+      transition: transform 0.2s ease, opacity 0.2s ease;
     }
-    @media (min-width: 720px) {
-      .logo img { height: 42px; }
-      .lead { font-size: 0.86rem; letter-spacing: 0.32em; }
-      .amount { font-size: 10.25rem; }
-      .tagline { font-size: 0.9rem; }
+    .sticky .btn { width: 100%; height: 56px; font-size: 1.08rem; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45); }
+    .sticky.hide { transform: translateY(110%); opacity: 0; pointer-events: none; }
+
+    /* Dialog */
+    dialog {
+      width: 100%; max-width: 560px; max-height: 100dvh; margin: auto 0 0; padding: 0;
+      color: var(--cream); background: var(--bg-2); border: 1px solid var(--line-2);
+      border-radius: 22px 22px 0 0; box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.5);
     }
+    dialog::backdrop { background: rgba(4, 8, 12, 0.72); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); }
+    dialog[open] { animation: up 0.22s ease-out; }
+    @keyframes up { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
+    .dlg-head { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.25rem 0.25rem; }
+    .dlg-head h2 { margin: 0; font-size: 1.35rem; letter-spacing: -0.015em; }
+    .x { appearance: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-2); background: transparent; color: var(--cream); font-size: 1.3rem; line-height: 1; cursor: pointer; }
+    .x:hover { border-color: var(--gold); }
+    .dlg-body { padding: 0.5rem 1.25rem calc(1.25rem + env(safe-area-inset-bottom)); overflow-y: auto; max-height: calc(100dvh - 70px); }
+    .dlg-body .intro { margin: 0 0 1rem; color: var(--soft); font-size: 0.92rem; }
+    .field { margin-bottom: 0.95rem; }
+    .field label, .field .lbl { display: block; margin-bottom: 0.4rem; font-size: 0.86rem; font-weight: 600; color: var(--cream); }
+    .field .hint { font-weight: 400; color: var(--muted); }
+    .field input, .field textarea, .field select {
+      appearance: none; -webkit-appearance: none; width: 100%; margin: 0; padding: 0.8rem 0.95rem;
+      color: var(--cream); background: var(--field); border: 1px solid var(--line-2); border-radius: 12px;
+      font: inherit; font-size: 16px; outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .field textarea { min-height: 96px; resize: vertical; }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(243, 238, 228, 0.42); }
+    .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.2); }
+    .cats { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .cats input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+    .cats label {
+      margin: 0; display: inline-flex; align-items: center; height: 38px; padding: 0 0.9rem; border-radius: 999px;
+      border: 1px solid var(--line-2); color: var(--soft); font-size: 0.86rem; font-weight: 550; cursor: pointer;
+    }
+    .cats input:checked + label { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 650; }
+    .cats input:focus-visible + label { box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.35); }
+    .money { position: relative; }
+    .money span { position: absolute; left: 0.95rem; top: 50%; transform: translateY(-50%); color: var(--muted); font-weight: 600; pointer-events: none; }
+    .money input { padding-left: 3.1rem; }
+    .row2 { display: grid; gap: 0 0.9rem; }
+    .submit { width: 100%; height: 56px; margin-top: 0.4rem; font-size: 1.08rem; border-radius: 14px; }
+    .fine { margin: 0.8rem 0 0; text-align: center; font-size: 0.8rem; color: var(--muted); }
+    .fine strong { color: var(--gold); font-weight: 600; }
+    .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+    @media (min-width: 640px) {
+      .cta-row { flex-direction: row; justify-content: center; }
+      .cta-row .btn-xl, .cta-row .btn-ghost { width: auto; }
+      .cta-row .btn-ghost { height: 66px; padding: 0 1.8rem; }
+      .steps { grid-template-columns: repeat(3, 1fr); }
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .row2 { grid-template-columns: 1fr 1fr; }
+      dialog { margin: auto; border-radius: 22px; }
+      .feed-head { flex-direction: row; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; }
+      .disclaimer { flex-basis: 100%; }
+    }
+    @media (min-width: 900px) {
+      body { padding-bottom: 0; }
+      .sticky { display: none; }
+      .nav a.link { display: inline; }
+      .hero { padding: 5rem 0 3.5rem; }
+      .hero h1 { max-width: 17ch; }
+      .grid { grid-template-columns: repeat(3, 1fr); }
+      .filters { margin: 0; padding-left: 0; padding-right: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
   </style>
 </head>
 <body>
-  <div class="frame">
-    <a class="logo" href="./" aria-label="AfterRole">
-      <img src="assets/afterrole-lockup-light.svg" width="182" height="42" alt="AfterRole">
-    </a>
-    <main class="stage">
-      <h1>
-        <span class="lead">Claim</span>
-        <span class="amount"><span class="curr">$</span>50</span>
-        <span class="lead">credit</span>
-      </h1>
-      <p class="tagline">Top-firm talent, between roles.<br>Rates well below market. From $10 a task.</p>
-      <form id="request" action="https://formsubmit.co/7f1a1758cb43c85a47bc56ef2145bf67" method="POST">
-        <input type="hidden" name="_subject" value="AfterRole $50 credit claim (variant B)">
+  <header class="top">
+    <div class="wrap">
+      <a class="logo" href="./" aria-label="AfterRole home"><img src="assets/afterrole-lockup-light.svg" width="139" height="32" alt="AfterRole"></a>
+      <nav class="nav">
+        <a class="link" href="#how">How it works</a>
+        <a class="link" href="#examples">Example tasks</a>
+        <button class="btn btn-gold btn-sm" type="button" data-open-post>Post a task</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">Remote tasks · Australia</p>
+        <h1>Small jobs done by <em>experienced pros</em>, for less.</h1>
+        <p class="sub">Post a remote task, name your budget, and compare quotes from experienced pros.</p>
+        <p class="position">Top-firm talent, between roles. Rates well below market. From $10 a task.</p>
+        <div class="cta-row">
+          <button class="btn btn-gold btn-xl" type="button" data-open-post><span class="plus">+</span> Post a task</button>
+          <a class="btn btn-ghost" href="#examples">See example tasks</a>
+        </div>
+        <p class="credit-note">Free to post. New members get <strong>$50 credit</strong> on their first order.</p>
+      </div>
+    </section>
+
+    <section id="how" class="wrap" aria-label="How it works">
+      <ol class="steps">
+        <li><b>Describe the job</b>A few lines and your budget in AUD. Takes about a minute.</li>
+        <li><b>Get quotes by email</b>Pros reply with a price and how they would do it.</li>
+        <li><b>Pick one</b>You choose who does it. Your $50 credit comes off the first order.</li>
+      </ol>
+    </section>
+
+    <section id="examples" class="wrap" aria-labelledby="ex-title">
+      <div class="feed-head">
+        <h2 id="ex-title">Example tasks</h2>
+        <p class="disclaimer" role="note">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="#E3B65F" stroke-width="1.5"/><path d="M8 7v4.2M8 4.6v.1" stroke="#E3B65F" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span>Illustrative examples of the kinds of tasks and typical quotes. Not real listings.</span>
+        </p>
+      </div>
+      <div class="filters" role="group" aria-label="Filter examples by category" id="filters"></div>
+      <div class="grid" id="feed"></div>
+
+      <div class="band">
+        <h2>Got a task like these?</h2>
+        <p>Post it free. Quotes come to your inbox, and you only go ahead if one suits you.</p>
+        <button class="btn btn-gold btn-lg" type="button" data-open-post><span class="plus">+</span> Post a task</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">AfterRole · Remote tasks from experienced pros · <a href="claim.html">Claim $50 credit</a></div>
+  </footer>
+
+  <div class="sticky" id="sticky">
+    <button class="btn btn-gold" type="button" data-open-post><span class="plus">+</span> Post a task</button>
+  </div>
+
+  <dialog id="post" aria-labelledby="post-title">
+    <div class="dlg-head">
+      <h2 id="post-title">Post a task</h2>
+      <button class="x" type="button" id="close-post" aria-label="Close">×</button>
+    </div>
+    <div class="dlg-body">
+      <p class="intro">Tell us what you need. We’ll email you quotes from pros who fit.</p>
+      <form id="task-form" action="https://formsubmit.co/7f1a1758cb43c85a47bc56ef2145bf67" method="POST">
+        <input type="hidden" name="_subject" value="AfterRole task posted">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://todanley.github.io/afterrole/thanks.html">
-        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
-        <input type="hidden" name="variant" value="B">
-        <input type="hidden" name="landing_variant" value="B">
+        <input type="hidden" name="_next" value="https://todanley.github.io/afterrole/thanks.html?posted=1&variant=B2">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="hidden" name="variant" value="B2">
+        <input type="hidden" name="landing_variant" value="B2">
         <input type="hidden" name="brand" value="AfterRole">
-        <input type="hidden" id="utm_source" name="utm_source" value="">
-        <input type="hidden" id="utm_medium" name="utm_medium" value="">
-        <input type="hidden" id="utm_campaign" name="utm_campaign" value="">
-        <input type="hidden" id="utm_content" name="utm_content" value="">
-        <input type="hidden" id="landing_section" name="landing_section" value="">
-
-        <label class="sr" for="email">Email</label>
-        <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" placeholder="Email">
+        <input type="hidden" name="utm_source" data-utm="utm_source" value="">
+        <input type="hidden" name="utm_medium" data-utm="utm_medium" value="">
+        <input type="hidden" name="utm_campaign" data-utm="utm_campaign" value="">
+        <input type="hidden" name="utm_content" data-utm="utm_content" value="">
+        <input type="hidden" name="source_card" id="source_card" value="">
         <input type="hidden" name="_replyto" value="">
 
-        <button type="submit">Claim my $50 credit</button>
-        <p class="legal">New members. Credit applies to first order.</p>
+        <div class="field">
+          <label for="t-title">What do you need done?</label>
+          <input id="t-title" name="task_title" type="text" required maxlength="120" placeholder="e.g. Fix my WordPress contact form">
+        </div>
+        <div class="field">
+          <label for="t-desc">Details <span class="hint">(optional)</span></label>
+          <textarea id="t-desc" name="task_description" maxlength="1500" placeholder="What’s wrong or what you want, any links, and when you need it by."></textarea>
+        </div>
+        <div class="field">
+          <span class="lbl" id="cat-lbl">Category</span>
+          <div class="cats" role="radiogroup" aria-labelledby="cat-lbl">
+            <input type="radio" name="category" id="c-web" value="Web/site fixes" required><label for="c-web">Web/site fixes</label>
+            <input type="radio" name="category" id="c-data" value="Data & spreadsheets"><label for="c-data">Data &amp; spreadsheets</label>
+            <input type="radio" name="category" id="c-design" value="Design"><label for="c-design">Design</label>
+            <input type="radio" name="category" id="c-writing" value="Writing & editing"><label for="c-writing">Writing &amp; editing</label>
+            <input type="radio" name="category" id="c-admin" value="Admin/research"><label for="c-admin">Admin/research</label>
+            <input type="radio" name="category" id="c-other" value="Other"><label for="c-other">Other</label>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="t-budget">Budget</label>
+            <div class="money"><span>A$</span><input id="t-budget" name="budget_aud" type="number" inputmode="numeric" min="10" step="1" required placeholder="40"></div>
+          </div>
+          <div class="field">
+            <label for="t-email">Email for quotes</label>
+            <input id="t-email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@company.com">
+          </div>
+        </div>
+        <button class="btn btn-gold submit" type="submit">Post my task</button>
+        <p class="fine">Free to post, no obligation. New members get <strong>$50 credit</strong> on their first order.</p>
       </form>
-    </main>
-  </div>
+    </div>
+  </dialog>
+
   <script>
     (function () {
-      var params = new URLSearchParams(window.location.search);
-      var keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
-      keys.forEach(function (k) {
-        var v = params.get(k);
-        if (v) sessionStorage.setItem("ar_" + k, v);
-        var saved = sessionStorage.getItem("ar_" + k) || "";
-        var field = document.getElementById(k);
-        if (field) field.value = saved;
+      // Illustrative examples only. Not real listings, people or offers.
+      var TASKS = [
+        { cat: "Web/site fixes", title: "Contact form on WordPress site stopped sending", desc: "Messages from the form never arrive. Need it fixed and tested.", budget: 40, ago: "2 hours ago", status: "open",
+          offers: [["A$35", "Ex-agency WordPress developer", "Usually an SMTP setting. I’d check that first, then send a test to you."], ["A$40", "Former in-house web developer", "Fix plus a short note on what broke so it’s easy to spot next time."]] },
+        { cat: "Data & spreadsheets", title: "Dedupe a 2,400-row customer list in Excel", desc: "Same customers entered twice with slightly different spellings.", budget: 40, ago: "5 hours ago", status: "open",
+          offers: [["A$30", "Former bank data analyst", "Match on email and phone, then flag near-duplicates for you to confirm."], ["A$35", "Ex-consulting analyst", "Cleaned file plus a tab listing every row I merged."]] },
+        { cat: "Design", title: "Turn quarterly numbers into a 6-slide deck", desc: "Figures are in a spreadsheet. Need clean charts for a board update.", budget: 80, ago: "1 day ago", status: "assigned",
+          offers: [["A$70", "Former strategy consultant", "Six slides in your template, one chart per slide, notes on each.", true], ["A$75", "Ex-agency presentation designer", "Can match your brand colours and send PowerPoint and PDF."]] },
+        { cat: "Writing & editing", title: "Proofread 3,000 words of website copy", desc: "Australian English. Five pages, mostly service descriptions.", budget: 50, ago: "1 day ago", status: "assigned",
+          offers: [["A$40", "Former in-house editor at a publisher", "Tracked changes in Google Docs, with queries in comments.", true], ["A$45", "Ex-corporate comms manager", "Proofread plus suggestions where a sentence runs long."]] },
+        { cat: "Admin/research", title: "Find 30 packaging suppliers in NSW and VIC", desc: "Name, website, minimum order and contact email in a sheet.", budget: 45, ago: "3 hours ago", status: "open",
+          offers: [["A$35", "Former procurement coordinator", "I’ll check each website for minimum order, not just directory listings."], ["A$45", "Ex-operations manager", "30 suppliers plus a short note on the five that look best."]] },
+        { cat: "Data & spreadsheets", title: "Google Sheet that flags overdue invoices", desc: "Highlight anything unpaid after 30 days and total it by client.", budget: 25, ago: "6 hours ago", status: "open",
+          offers: [["A$20", "Former finance analyst", "Conditional formatting plus a summary tab by client."], ["A$25", "Ex-accounting firm associate", "Can add an aged-debt view (30/60/90 days) as well."]] },
+        { cat: "Writing & editing", title: "Write three product descriptions", desc: "Skincare range, about 100 words each, plain and factual.", budget: 20, ago: "4 hours ago", status: "open",
+          offers: [["A$15", "Ex-agency copywriter", "I’ll stick to what’s on the label and avoid health claims."], ["A$20", "Former retail marketing coordinator", "Three descriptions plus a short SEO title for each."]] },
+        { cat: "Admin/research", title: "Set up Gmail filters and an out-of-office reply", desc: "Shared inbox gets messy. Want labels for invoices, orders and support.", budget: 15, ago: "8 hours ago", status: "open",
+          offers: [["A$10", "Former IT support lead", "Labels, three filters and the auto-reply. About 20 minutes over a screen share."], ["A$15", "Ex-executive assistant", "Same setup plus a one-page guide for your team."]] },
+        { cat: "Web/site fixes", title: "Mobile menu won’t open on Squarespace site", desc: "Works on desktop. On phones the menu icon does nothing.", budget: 60, ago: "1 day ago", status: "assigned",
+          offers: [["A$45", "Ex-agency front-end developer", "Likely a custom code block clashing with the template. I’d test on iOS and Android.", true], ["A$55", "Former in-house web developer at a retailer", "Fix plus a check of the other pages on mobile."]] }
+      ];
+
+      function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+      var pin = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 0-4.5 4.5c0 3.4 4.5 8.5 4.5 8.5s4.5-5.1 4.5-8.5A4.5 4.5 0 0 0 8 1.5Z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6" r="1.6" fill="currentColor"/></svg>';
+      var clock = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.3" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.6V8l2.3 1.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>';
+
+      var feed = document.getElementById("feed");
+      feed.innerHTML = TASKS.map(function (t, i) {
+        var n = t.offers.length;
+        return '<article class="card" data-cat="' + esc(t.cat) + '">' +
+          '<div class="card-top"><div class="chips"><span class="chip chip-ex">Example</span><span class="chip chip-cat">' + esc(t.cat) + '</span></div>' +
+          '<span class="status ' + t.status + '">' + (t.status === "open" ? "Open" : "Assigned") + '</span></div>' +
+          '<h3>' + esc(t.title) + '</h3><p class="desc">' + esc(t.desc) + '</p>' +
+          '<div class="meta"><span>' + pin + 'Remote</span><span>' + clock + 'Posted ' + esc(t.ago) + '</span>' +
+          '<span class="budget"><small>Budget</small>A$' + t.budget + '</span></div>' +
+          '<p class="offers-label">' + n + (n === 1 ? ' quote' : ' quotes') + '</p>' +
+          '<ul class="offers">' + t.offers.map(function (o) {
+            return '<li class="offer' + (o[3] ? ' chosen' : '') + '"><span class="price">' + esc(o[0]) + '</span><span class="role">' + esc(o[1]) + '</span><span class="pitch">' + esc(o[2]) + '</span></li>';
+          }).join("") + '</ul>' +
+          '<button class="similar" type="button" data-open-post data-cat="' + esc(t.cat) + '" data-card="' + i + '">Post a task like this →</button>' +
+          '</article>';
+      }).join("");
+
+      // Filters
+      var cats = ["All"].concat(TASKS.map(function (t) { return t.cat; }).filter(function (c, i, a) { return a.indexOf(c) === i; }));
+      var filters = document.getElementById("filters");
+      filters.innerHTML = cats.map(function (c, i) { return '<button type="button" aria-pressed="' + (i === 0) + '" data-f="' + esc(c) + '">' + esc(c) + '</button>'; }).join("");
+      filters.addEventListener("click", function (e) {
+        var b = e.target.closest("button"); if (!b) return;
+        var f = b.getAttribute("data-f");
+        filters.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        feed.querySelectorAll(".card").forEach(function (c) { c.hidden = !(f === "All" || c.getAttribute("data-cat") === f); });
       });
 
-      var hash = (window.location.hash || "").replace("#", "");
-      var category = params.get("category") || params.get("utm_content") || hash;
-      var allowed = { coding: 1, design: 1, writing: 1, admin: 1, marketing: 1, video: 1, other: 1 };
-      var sectionField = document.getElementById("landing_section");
-      if (category && allowed[category] && sectionField) {
-        sectionField.value = category;
-      } else if (sectionField && hash && hash !== "request") {
-        sectionField.value = hash;
-      }
+      // UTMs
+      var params = new URLSearchParams(window.location.search);
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content"].forEach(function (k) {
+        var v = params.get(k);
+        try { if (v) sessionStorage.setItem("ar_" + k, v); } catch (e) {}
+        var saved = ""; try { saved = sessionStorage.getItem("ar_" + k) || ""; } catch (e) {}
+        document.querySelectorAll('[data-utm="' + k + '"]').forEach(function (f) { f.value = saved; });
+      });
 
-      var email = document.getElementById("email");
-      var reply = document.querySelector("input[name='_replyto']");
-      function sync() { if (email && reply) reply.value = email.value; }
-      if (email) email.addEventListener("input", sync);
-      sync();
-      var form = document.getElementById("request");
-      if (form) {
-        form.addEventListener("submit", function () {
-          var emailVal = email && email.value ? email.value.trim() : "";
-          try {
-            if (emailVal) {
-              sessionStorage.setItem("ar_claim_email", emailVal);
-              localStorage.setItem("ar_claim_email", emailVal);
-            }
-          } catch (e) {}
-          var next = form.querySelector("input[name='_next']");
-          if (next && emailVal) {
-            try {
-              var u = new URL(next.getAttribute("value") || next.value);
-              u.searchParams.set("email", emailVal);
-              next.value = u.toString();
-            } catch (err) {}
-          }
+      // Dialog
+      var dlg = document.getElementById("post");
+      var form = document.getElementById("task-form");
+      function openPost(cat, card) {
+        if (cat) { form.querySelectorAll('input[name="category"]').forEach(function (r) { r.checked = (r.value === cat); }); }
+        document.getElementById("source_card").value = card != null ? ("example-" + card) : "";
+        if (typeof dlg.showModal === "function") { dlg.showModal(); } else { dlg.setAttribute("open", ""); }
+        setTimeout(function () { var t = document.getElementById("t-title"); if (t && window.matchMedia("(min-width: 640px)").matches) t.focus(); }, 30);
+      }
+      document.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-open-post]"); if (!b) return;
+        e.preventDefault();
+        openPost(b.getAttribute("data-cat"), b.getAttribute("data-card"));
+      });
+      document.getElementById("close-post").addEventListener("click", function () { dlg.close ? dlg.close() : dlg.removeAttribute("open"); });
+      dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+      if (window.location.hash === "#post") openPost();
+
+      // Submit
+      var email = document.getElementById("t-email");
+      var reply = form.querySelector('input[name="_replyto"]');
+      email.addEventListener("input", function () { reply.value = email.value; });
+      form.addEventListener("submit", function () {
+        var v = (email.value || "").trim();
+        reply.value = v;
+        try {
+          sessionStorage.setItem("ar_claim_email", v); localStorage.setItem("ar_claim_email", v);
+          sessionStorage.setItem("ar_variant", "B2");
+        } catch (e) {}
+        var next = form.querySelector('input[name="_next"]');
+        try { var u = new URL(next.value); if (v) u.searchParams.set("email", v); next.value = u.toString(); } catch (err) {}
+      });
+
+      // Hide sticky CTA when the hero button or the bottom band is on screen
+      var sticky = document.getElementById("sticky");
+      if ("IntersectionObserver" in window) {
+        var seen = new Set();
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) seen.add(en.target); else seen.delete(en.target); });
+          sticky.classList.toggle("hide", seen.size > 0);
         });
+        io.observe(document.querySelector(".cta-row"));
+        io.observe(document.querySelector(".band"));
       }
-
     })();
   </script>
 </body>
