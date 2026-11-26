@@ -60,11 +60,8 @@
       -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
-    header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    header.top .wrap { display: flex; align-items: center; height: 64px; }
     .logo img { display: block; height: 32px; width: auto; }
-    .nav { display: flex; align-items: center; gap: 1.25rem; }
-    .nav a.link { text-decoration: none; color: var(--soft); font-size: 0.94rem; display: none; }
-    .nav a.link:hover { color: var(--cream); }
 
     /* Buttons */
     .btn {
@@ -79,28 +76,33 @@
     .btn:focus-visible { outline: 0; box-shadow: 0 0 0 3px rgba(224, 178, 92, 0.4); }
     .btn-gold { background: var(--gold); color: var(--ink); }
     .btn-gold:hover { background: var(--gold-hover); }
-    .btn-sm { height: 40px; padding: 0 1.1rem; font-size: 0.92rem; }
     .btn-lg { height: 60px; padding: 0 2rem; font-size: 1.12rem; }
     .btn-xl { height: 66px; padding: 0 2.4rem; font-size: 1.2rem; box-shadow: 0 10px 40px rgba(227, 182, 95, 0.28); }
     .btn .plus { font-size: 1.35em; line-height: 1; font-weight: 500; margin-top: -0.06em; }
 
-    /* Hero */
-    .hero { padding: 2.25rem 0 2.25rem; text-align: center; }
-    .eyebrow {
-      display: inline-block; margin: 0 0 1.1rem; padding: 0.35rem 0.8rem;
-      border: 1px solid rgba(224, 178, 92, 0.35); border-radius: 999px;
-      color: var(--gold); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em;
+    /* Hero — above the fold: badge, title, one button only */
+    .hero {
+      min-height: calc(100svh - 64px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 0 4rem;
+    }
+    .hero .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
     .hero h1 {
       margin: 0 auto; max-width: 15ch;
       font-size: clamp(2.3rem, 9vw, 4.1rem); line-height: 1.04; font-weight: 700; letter-spacing: -0.03em;
     }
     .hero h1 em { font-style: normal; color: var(--gold); }
-    .hero .sub { margin: 1.1rem auto 0; max-width: 34rem; color: var(--soft); font-size: 1.08rem; }
-    .hero .position { margin: 0.9rem auto 0; color: var(--muted); font-size: 0.92rem; letter-spacing: 0.01em; }
     .offer-badge {
       display: inline-flex; flex-direction: column; align-items: center;
-      margin: 0 0 1.25rem; padding: 0.7rem 1.5rem 0.75rem;
+      margin: 0 0 2.1rem; padding: 0.85rem 1.7rem 0.95rem;
       background: var(--gold); color: var(--ink);
       border-radius: 20px;
       box-shadow: 0 12px 36px rgba(227, 182, 95, 0.4);
@@ -110,13 +112,18 @@
       font-weight: 800; letter-spacing: -0.045em; line-height: 0.95;
     }
     .offer-badge .for {
-      margin-top: 0.2rem;
+      margin-top: 0.25rem;
       font-size: 0.82rem; font-weight: 650; letter-spacing: 0.01em;
     }
-    .cta-row { display: flex; justify-content: center; margin-top: 1.75rem; }
-    .cta-row .btn-xl { width: 100%; max-width: 28rem; }
-    .credit-note { margin: 1rem 0 0; font-size: 0.86rem; color: var(--soft); }
-    .credit-note strong { color: var(--gold); font-weight: 650; }
+    .cta-row { display: flex; justify-content: center; margin-top: 2.5rem; width: 100%; }
+    .cta-row .btn-xl { width: 100%; max-width: 22rem; }
+    .how-intro {
+      margin: 0 0 1.35rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+    }
     .dlg-offer { margin: 0.2rem 0 0; color: var(--gold); font-size: 0.95rem; font-weight: 650; }
 
     /* How it works */
@@ -212,9 +219,12 @@
       padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
       background: linear-gradient(180deg, rgba(11, 19, 28, 0), rgba(11, 19, 28, 0.94) 35%);
       transition: transform 0.2s ease, opacity 0.2s ease;
+      transform: translateY(110%);
+      opacity: 0;
+      pointer-events: none;
     }
     .sticky .btn { width: 100%; height: 56px; font-size: 1.08rem; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45); }
-    .sticky.hide { transform: translateY(110%); opacity: 0; pointer-events: none; }
+    .sticky.show { transform: none; opacity: 1; pointer-events: auto; }
 
     /* Dialog */
     dialog {
@@ -274,10 +284,10 @@
     @media (min-width: 900px) {
       body { padding-bottom: 0; }
       .sticky { display: none; }
-      .nav a.link { display: inline; }
-      .hero { padding: 4.25rem 0 3.25rem; }
+      .hero { padding: 4.5rem 0 5rem; }
       .hero h1 { max-width: 17ch; }
-      .offer-badge { margin-bottom: 1.5rem; padding: 0.9rem 2.1rem 1rem; }
+      .offer-badge { margin-bottom: 2.25rem; padding: 0.95rem 2.2rem 1.05rem; }
+      .cta-row { margin-top: 2.75rem; }
       .grid { grid-template-columns: repeat(3, 1fr); }
       .filters { margin: 0; padding-left: 0; padding-right: 0; }
     }
@@ -288,11 +298,6 @@
   <header class="top">
     <div class="wrap">
       <a class="logo" href="./" aria-label="AfterRole home"><img src="assets/afterrole-lockup-light.svg" width="139" height="32" alt="AfterRole"></a>
-      <nav class="nav">
-        <a class="link" href="#how">How it works</a>
-        <a class="link" href="#examples">Example tasks</a>
-        <button class="btn btn-gold btn-sm" type="button" data-open-post>Post a task</button>
-      </nav>
     </div>
   </header>
 
@@ -304,16 +309,14 @@
           <span class="for">your first order · new members</span>
         </p>
         <h1>Small jobs done by <em>experienced pros</em>, for less.</h1>
-        <p class="sub">Post a remote task, name your budget, and compare quotes from experienced pros.</p>
-        <p class="position">Top-firm talent, between roles. Rates well below market. From $10 a task.</p>
         <div class="cta-row">
-          <button class="btn btn-gold btn-xl" type="button" data-open-post><span class="plus">+</span> Post a task — get $50 off</button>
+          <button class="btn btn-gold btn-xl" type="button" data-open-post><span class="plus">+</span> Post a task</button>
         </div>
-        <p class="credit-note">Free to post. New members get <strong>$50 credit</strong> on their first order.</p>
       </div>
     </section>
 
     <section id="how" class="wrap" aria-label="How it works">
+      <p class="how-intro">Top-firm talent, between roles. Rates well below market. From $10 a task.</p>
       <ol class="steps">
         <li><b>Describe the job</b>A few lines and your budget in AUD. Takes about a minute.</li>
         <li><b>Get quotes</b>Pros reply with a price and how they would do it.</li>
@@ -506,17 +509,26 @@
         try { var u = new URL(next.value); if (v) u.searchParams.set("email", v); next.value = u.toString(); } catch (err) {}
       });
 
-      // Hide sticky CTA when the hero button or the bottom band is on screen
+      // Sticky CTA stays hidden while the hero button (or the bottom band) is on screen
       var sticky = document.getElementById("sticky");
-      if ("IntersectionObserver" in window) {
-        var seen = new Set();
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) { if (en.isIntersecting) seen.add(en.target); else seen.delete(en.target); });
-          sticky.classList.toggle("hide", seen.size > 0);
-        });
-        io.observe(document.querySelector(".cta-row"));
-        io.observe(document.querySelector(".band"));
+      var heroCta = document.querySelector(".cta-row");
+      var band = document.querySelector(".band");
+      function isOnScreen(el) {
+        if (!el) return false;
+        var r = el.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight;
       }
+      function syncSticky() {
+        sticky.classList.toggle("show", !(isOnScreen(heroCta) || isOnScreen(band)));
+      }
+      syncSticky();
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(syncSticky);
+        if (heroCta) io.observe(heroCta);
+        if (band) io.observe(band);
+      }
+      window.addEventListener("scroll", syncSticky, { passive: true });
+      window.addEventListener("resize", syncSticky);
     })();
   </script>
 </body>
